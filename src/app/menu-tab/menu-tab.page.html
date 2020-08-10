@@ -1,0 +1,16 @@
+<app-header [title]="'Menu'"></app-header>
+
+<ion-content [fullscreen]="true">
+  <ng-template #loading>
+    <app-loader></app-loader>
+  </ng-template>
+  <ion-list *ngIf="(vendors$|async);else loading">
+    <ion-list-header>
+      Choose a Vendor
+    </ion-list-header>
+
+    <ion-item *ngFor="let vendor of vendors$|async" (click)="loadVendorMenu(vendor)">
+      <ion-label>{{vendor.name}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

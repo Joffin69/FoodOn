@@ -1,0 +1,20 @@
+<ion-content>
+  <ion-slides #slider>
+    <ion-slide>
+      <img src="./../../../assets/burger.png" />
+      <h2>Signup</h2>
+      <ion-input [(ngModel)]="email" placeholder="john@doe.com" class="login-input"></ion-input>
+      <ion-input type="password" [(ngModel)]="password" placeholder="Password" class="login-input"></ion-input>
+      <ion-input type="password" [(ngModel)]="confirmPass" placeholder="Confirm Password" class="login-input">
+      </ion-input>
+      <ion-button color="primary" (click)="signup()" [disabled]="!email || !password||!confirmPass">Signup</ion-button>
+
+      <div class="login-container">
+        Already have an account? <ion-router-link routerLink="/login" class="underline">Login</ion-router-link>
+      </div>
+
+    </ion-slide>
+
+  </ion-slides>
+
+</ion-content>

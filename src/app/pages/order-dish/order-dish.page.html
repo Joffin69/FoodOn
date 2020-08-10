@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Oder {{(dish$ | async)?.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card color="primary">
+    <ion-card-header>
+      <ion-card-subtitle>{{(dish$ | async)?.name}}</ion-card-subtitle>
+      <ion-card-title>{{(dish$ | async)?.price}}₹</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{(dish$ | async)?.description}}
+
+      <ion-input class="amount-inpput" type="number" min="1" [(ngModel)]="amount" placeholder="amount"></ion-input>
+      <ion-toolbar>
+        <ion-buttons slot="end">
+          <ion-button color="secondary" slot="end" (click)="order()">
+            <ion-icon slot="icon-only" icon="cart"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-title class="section-title">You may like these dishes!</ion-title>
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide *ngFor="let dish of recommendedDishes$|async">
+      <ion-card color="primary">
+        <img alt="" srcset="">
+        <ion-card-header>
+          <ion-card-subtitle>{{dish.name}}</ion-card-subtitle>
+          <ion-card-title>{{dish.price}}₹</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          {{dish.description}}
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+
+
+</ion-content>

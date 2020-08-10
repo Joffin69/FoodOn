@@ -1,0 +1,95 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+:root{
+   --ion-color-primary:#365eff;
+  --ion-background-color: #0000000;
+  --ion-background-color-rgb: 255,255,255;
+
+  --ion-text-color: #000000;
+  --ion-text-color-rgb: 0,0,0;
+
+  --ion-color-step-50: #f2f2f2;
+  --ion-color-step-100: #e6e6e6;
+  --ion-color-step-150: #d9d9d9;
+  --ion-color-step-200: #cccccc;
+  --ion-color-step-250: #bfbfbf;
+  --ion-color-step-300: #b3b3b3;
+  --ion-color-step-350: #a6a6a6;
+  --ion-color-step-400: #999999;
+  --ion-color-step-450: #8c8c8c;
+  --ion-color-step-500: #808080;
+  --ion-color-step-550: #737373;
+  --ion-color-step-600: #666666;
+  --ion-color-step-650: #595959;
+  --ion-color-step-700: #4d4d4d;
+  --ion-color-step-750: #404040;
+  --ion-color-step-800: #333333;
+  --ion-color-step-850: #262626;
+  --ion-color-step-900: #191919;
+  --ion-color-step-950: #0d0d0d;
+}
+ion-slides {
+      height: 100%;
+    }
+
+    .swiper-slide {
+      display: block;
+    }
+
+    .swiper-slide h2 {
+      margin-top: 2.8rem;
+    }
+
+    .swiper-slide img {
+      max-height: 50%;
+      max-width: 80%;
+      margin: 60px 0 40px;
+      pointer-events: none;
+    }
+
+    b {
+      font-weight: 500;
+    }
+
+    p {
+      padding: 0 40px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--ion-color-step-600, #60646b);
+    }
+
+    p b {
+      color: var(--ion-text-color, #000000);
+    }
+
+    .loading{
+      display: flex;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+    }

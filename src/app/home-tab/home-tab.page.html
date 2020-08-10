@@ -1,0 +1,39 @@
+<app-header [title]="'FoodOn'"></app-header>
+<ion-content [fullscreen]="true">
+  <ion-content>
+    <ion-title class="section-title">New Dishes</ion-title>
+    <ion-slides pager="true" [options]="slideOpts">
+      <ion-slide *ngFor="let dish of newDishes$|async">
+        <ion-card color="primary">
+          <img alt="" srcset="">
+          <ion-card-header>
+            <ion-card-subtitle>{{dish.name}}</ion-card-subtitle>
+            <ion-card-title>{{dish.price}}₹</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            {{dish.description}}
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+    <ion-title class="section-title">Recommended for You</ion-title>
+    <ion-slides pager="true" [options]="slideOpts">
+      <ion-slide *ngFor="let dish of recommended$|async">
+        <ion-card color="primary">
+          <img alt="" srcset="">
+          <ion-card-header>
+            <ion-card-subtitle>{{dish.name}}</ion-card-subtitle>
+            <ion-card-title>{{dish.price}}₹</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            {{dish.description}}
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+
+  </ion-content>
+
+</ion-content>

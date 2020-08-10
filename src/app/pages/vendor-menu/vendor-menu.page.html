@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{(vendor$ |async)?.name }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-template #loading>
+    <app-loader></app-loader>
+  </ng-template>
+  <ion-list *ngIf="(menu$|async);else loading">
+    <ion-list-header>
+      Today's menu for {{(vendor$ |async)?.name}}
+    </ion-list-header>
+
+    <ion-item *ngFor="let dish of menu$|async" (click)="orderDish(dish)">
+      <ion-label>{{dish.name}}</ion-label>
+      <span slot="end" class="price">{{dish.price}}₹</span>
+      <span slot="end" class="veg" *ngIf="dish.veg"></span>
+      <span slot="end" class="nonveg" *ngIf="!dish.veg"></span>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
