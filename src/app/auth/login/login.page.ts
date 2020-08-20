@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -8,16 +9,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  email: string;
+  empId: string;
   password: string;
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    //TODO Navigate user to dashboard if already loggedin
+    // TODO Navigate user to dashboard if already loggedin
   }
 
-  login() {
-    this.authService.login(this.email, this.password);
+  login(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
+    this.authService.login(form.value.empId, form.value.password);
   }
 
 }

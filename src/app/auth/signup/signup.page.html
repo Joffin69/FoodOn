@@ -1,5 +1,11 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>FoodOn HungerGone !</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
-  <ion-slides #slider>
+  <!-- <ion-slides #slider>
     <ion-slide>
       <img src="./../../../assets/burger.png" />
       <h2>Signup</h2>
@@ -8,13 +14,52 @@
       <ion-input type="password" [(ngModel)]="confirmPass" placeholder="Confirm Password" class="login-input">
       </ion-input>
       <ion-button color="primary" (click)="signup()" [disabled]="!email || !password||!confirmPass">Signup</ion-button>
-
       <div class="login-container">
         Already have an account? <ion-router-link routerLink="/login" class="underline">Login</ion-router-link>
       </div>
-
-    </ion-slide>
-
-  </ion-slides>
-
+    </ion-slide> 
+  </ion-slides>-->
+  <form #form="ngForm" (ngSubmit)="registerUser(form)">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-img class="ion-margin-vertical" src="./../../../assets/f1.jpg"></ion-img>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+            <ion-label position="floating">Employee ID</ion-label>
+            <ion-input type="email" ngModel name="empId" placeholder="753782" required></ion-input>
+          </ion-item> 
+        </ion-col>
+      </ion-row>
+      <ion-row> 
+        <ion-col>
+          <ion-item>
+            <ion-icon slot="start" name="key-outline"></ion-icon>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" ngModel name="password" placeholder="Password" required></ion-input>
+          </ion-item> 
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-icon slot="start" name="key-outline"></ion-icon>
+            <ion-label position="floating">Confirm Password</ion-label>
+            <ion-input type="password" ngModel name="confirm_password" placeholder="Confirm Password" (keyup)="confirmPwd(form)"></ion-input>
+          </ion-item> 
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="ion-text-center ion-margin-top ion-margin-horizontal">
+      <ion-button  color="primary" size="default" expand="block" type="submit" [disabled]="pValid">Sign Up</ion-button>
+    </div>
+  </form>
+   
+  <ion-text class="ion-text-center">
+    <h4>Already have an account ? <a routerLink="/login" class="underline">Login</a></h4>
+  </ion-text>
 </ion-content>

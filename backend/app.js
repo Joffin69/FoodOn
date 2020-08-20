@@ -4,14 +4,14 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const userRoutes = require('./routes/user');
-// const transacRoutes = require('./routes/transactions');
+const dataRoutes = require('./routes/data');
 
 const app = express();
 
 mongoose
   .connect(
     "mongodb+srv://jjohn69:8lOVqVnhouJypwmd@cluster0.4qdyz.mongodb.net/test?retryWrites=true&w=majority",
-    { useUnifiedTopology: true,  useNewUrlParser: true})
+    { useUnifiedTopology: true,  useNewUrlParser: true, useFindAndModify: false})
   .then(() => {
     console.log("Connected to database!");
   })
@@ -21,7 +21,6 @@ mongoose
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use("/images", express.static(path.join("backend/images")));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -37,6 +36,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/user',userRoutes);
-// app.use('/api/trans',transacRoutes);
+app.use('/api/data',dataRoutes);
 
 module.exports = app;

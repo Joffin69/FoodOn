@@ -1,5 +1,10 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>FoodOn HungerGone !</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
-  <ion-slides #slider>
+  <!-- <ion-slides #slider>
     <ion-slide>
       <img src="./../../../assets/burger.png" />
       <h2>Login</h2>
@@ -9,10 +14,25 @@
       <div class="signup-container">
         <ion-router-link routerLink="/signup" class="underline">Signup</ion-router-link>
       </div>
-
-
     </ion-slide>
-
-  </ion-slides>
-
+  </ion-slides> -->
+  <ion-img src="./../../../assets/burger.png"></ion-img>
+  <form class="ion-margin-horizontal" #form="ngForm" (ngSubmit)="login(form)">
+    <ion-item>
+      <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+      <ion-label position="floating">Employee ID</ion-label>
+      <ion-input type="text" ngModel name="empId" placeholder="753782" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon slot="start" name="key-outline"></ion-icon>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" ngModel name="password" placeholder="Password" required></ion-input>
+    </ion-item> 
+    <div class="ion-text-center ion-margin-top ion-margin-horizontal">
+      <ion-button  color="primary" size="default" type="submit" expand="block">Login</ion-button>
+    </div> 
+  </form>
+  <ion-text class="ion-text-center">
+    <h4>Don't have an account ? <a routerLink="/signup" class="underline">Sign Up</a></h4>
+  </ion-text>
 </ion-content>

@@ -1,5 +1,18 @@
+ion-text {
+  display: block !important;
+  margin: 10px;
+}
+
+.special {
+  margin-top: 27px;
+}
+
+img {
+  background-size: cover;
+}
+
 ion-slides {
-  height: 50%;
+  height: 40%;
   ion-card{
     height: 100%;
   }

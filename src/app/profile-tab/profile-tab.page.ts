@@ -10,13 +10,12 @@ import { switchMap } from 'rxjs/operators';
 })
 export class ProfilePage {
 
-  user$: Observable<any>
+  // user$: Observable<any>
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.user$ = this.authService.getUserInfo();
-    this.user$.subscribe(x => console.log(x));
-
+    // this.user$ = this.authService.getUserInfo();
+    // this.user$.subscribe(x => console.log(x));
   }
   logout() {
     this.authService.logout();

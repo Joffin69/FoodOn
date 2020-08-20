@@ -10,37 +10,35 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./order-dish.page.scss'],
 })
 export class OrderDishPage implements OnInit {
-  dish$: Observable<any>;
-  amount: Number;
   recommendedDishes$: Observable<any>;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private dataService: DataService, private toast: ToastController) { }
+  constructor() { }
 
   ngOnInit() {
 
-    this.activatedRoute.queryParams.subscribe(param => {
-      if (!param.id) {
-        return this.router.navigate(["tabs"]);
-      }
-      this.loadDish(param.id);
-    })
+    // this.activatedRoute.queryParams.subscribe(param => {
+    //   if (!param.id) {
+    //     return this.router.navigate(["tabs"]);
+    //   }
+    //   this.loadDish(param.id);
+    // })
 
   }
 
-  async loadDish(dish) {
-    this.dish$ = this.dataService.getDish(dish);
-    this.recommendedDishes$ = this.dataService.getRecommendedDishes();
-  }
+  // async loadDish(dish) {
+  //   this.dish$ = this.dataService.getDish(dish);
+  //   this.recommendedDishes$ = this.dataService.getRecommendedDishes();
+  // }
 
-  async order() {
-    //TODO Move to checkout page and collect money.
-    let toast = await this.toast.create({
-      message: "Order Placed Successfully.",
-      color: 'primary',
-      duration: 3000
-    });
-    toast.present();
-  }
+  // async order() {
+  //   //TODO Move to checkout page and collect money.
+  //   let toast = await this.toast.create({
+  //     message: "Order Placed Successfully.",
+  //     color: 'primary',
+  //     duration: 3000
+  //   });
+  //   toast.present();
+  // }
 
 
 

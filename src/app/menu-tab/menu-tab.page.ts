@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DataService } from '../services/data.service';
 import { Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: 'menu-tab.page.html',
   styleUrls: ['menu-tab.page.scss']
 })
-export class MenuPage {
+export class MenuPage implements OnInit{
 
   vendors$: Observable<any>;
 
@@ -17,14 +17,14 @@ export class MenuPage {
   }
 
   ngOnInit() {
-    this.vendors$ = this.dataService.getAllVendors();
+    // this.vendors$ = this.dataService.getAllVendors();
   }
 
-  loadVendorMenu(vendor) {
-    this.router.navigate(['vendor-menu'], {
-      queryParams: {
-        id: vendor.id
-      }
-    })
-  }
+  // loadVendorMenu(vendor) {
+  //   this.router.navigate(['vendor-menu'], {
+  //     queryParams: {
+  //       id: vendor.id
+  //     }
+  //   })
+  // }
 }

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+import { AuthGuard } from './guards/auth.guard';
+
 const routes: Routes = [
   {
     path: '',
@@ -12,7 +14,8 @@ const routes: Routes = [
   },
   {
     path: 'setup-profile',
-    loadChildren: () => import('./pages/setup-profile/setup-profile.module').then(m => m.SetupProfilePageModule)
+    loadChildren: () => import('./pages/setup-profile/setup-profile.module').then(m => m.SetupProfilePageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'vendor-menu',
@@ -31,6 +34,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }

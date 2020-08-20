@@ -1,15 +1,15 @@
 const express = require("express");
 
-const UserController = require("../controllers/user");
+const DataController = require("../controllers/data");
 // const checkFile = require('../middleware/file');
 
 const router = express.Router();
 
-router.post("/signup", UserController.createUser);
+router.get("/getNewDishes", DataController.getNewDishes);
 
-router.post("/login", UserController.userLogin);
+router.get("/getRecDishes", DataController.getRecDishes);
 
-router.post("/saveUser", UserController.saveUserData);
+// router.post("/saveUser", DataController.saveUserData);
 
 // router.get("/getUsers", UserController.getUsers);
 
