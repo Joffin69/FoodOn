@@ -125,7 +125,7 @@ export class AuthService {
     this.http.post<{message: string, result: object}>('http://localhost:3000/api/user/saveUser', userInfo)
     .subscribe((result) => {
       console.log(result);
-      // this.router.navigate(['/setup-profile']);
+      this.router.navigate(['/tabs']);
     }, error => {
       console.log(error);
     });
