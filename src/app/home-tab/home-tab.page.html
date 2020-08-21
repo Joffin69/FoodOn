@@ -1,11 +1,12 @@
-<app-header>
+<!-- <app-header>
   <ion-toolbar>
     <ion-title>FoodOn HungerGone !</ion-title>
     <ion-buttons>
       <ion-button slot="end">Logout</ion-button>
     </ion-buttons>
   </ion-toolbar>
-</app-header>
+</app-header> -->
+<app-header [title]="'FoodOn HungerGone !'"></app-header>
 <ion-content>
   <ion-text class="ion-text-center special">Today's Special</ion-text>
   <ion-slides [options]="slideOpts">

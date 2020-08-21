@@ -15,7 +15,7 @@ const routes: Routes = [
   {
     path: 'setup-profile',
     loadChildren: () => import('./pages/setup-profile/setup-profile.module').then(m => m.SetupProfilePageModule),
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: 'vendor-menu',
