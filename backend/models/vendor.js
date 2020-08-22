@@ -6,4 +6,4 @@ const vendorSchema = mongoose.Schema({
   rating: { type: Number}
 });
 
-module.exports = mongoose.model("vendor", vendorSchema);
+module.exports = mongoose.model("Vendor", vendorSchema);

@@ -9,10 +9,12 @@ router.get("/getNewDishes", DataController.getNewDishes);
 
 router.get("/getRecDishes", DataController.getRecDishes);
 
-// router.post("/saveUser", DataController.saveUserData);
+router.get("/getAllVendors", DataController.getAllVendors);
 
-// router.get("/getUsers", UserController.getUsers);
+router.post("/getVendor", DataController.getVendor);
 
-// router.post("/deleteUser", UserController.deleteUser);
+router.post("/getCategoriesForVendor", DataController.getCategoriesForVendor);
+
+router.post("/getVendorDishes", DataController.getVendorDishes);
 
 module.exports = router;

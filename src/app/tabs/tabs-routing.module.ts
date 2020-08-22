@@ -7,8 +7,8 @@ import { AuthGuard } from '../guards/auth.guard';
 const routes: Routes = [
   {
     path: 'tabs',
-    canActivate: [AuthGuard],
-    canActivateChild: [AuthGuard],
+    // canActivate: [AuthGuard],
+    // canActivateChild: [AuthGuard],
     component: TabsPage,
     children: [
       {
@@ -17,7 +17,17 @@ const routes: Routes = [
       },
       {
         path: 'menu',
-        loadChildren: () => import('../menu-tab/menu-tab.module').then(m => m.Tab2PageModule)
+        // loadChildren: () => import('../menu-tab/menu-tab.module').then(m => m.Tab2PageModule),
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../menu-tab/menu-tab.module').then( m => m.Tab2PageModule),
+          },
+          {
+            path: ':vendorId',
+            loadChildren: () => import('../pages/vendor-menu/vendor-menu.module').then( m => m.VendorMenuPageModule),
+          }
+        ]
       },
       {
         path: 'profile',

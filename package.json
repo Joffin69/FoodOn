@@ -29,6 +29,7 @@
     "@ionic/angular": "^5.0.0",
     "bcryptjs": "^2.4.3",
     "firebase": "^7.17.2",
+    "ionic4-star-rating": "^1.1.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.0",
     "nodemon": "^2.0.4",

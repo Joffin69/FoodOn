@@ -17,10 +17,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/setup-profile/setup-profile.module').then(m => m.SetupProfilePageModule),
     // canActivate: [AuthGuard]
   },
-  {
-    path: 'vendor-menu',
-    loadChildren: () => import('./pages/vendor-menu/vendor-menu.module').then(m => m.VendorMenuPageModule)
-  },
+  // {
+  //   path: ':vendorId',
+  //   loadChildren: () => import('./pages/vendor-menu/vendor-menu.module').then(m => m.VendorMenuPageModule)
+  // },
   {
     path: 'order-dish',
     loadChildren: () => import('./pages/order-dish/order-dish.module').then(m => m.OrderDishPageModule)

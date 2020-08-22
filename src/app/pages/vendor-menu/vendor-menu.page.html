@@ -4,18 +4,70 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>
-      {{(vendor$ |async)?.name }}
+      FoodOn HungerGone!
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
   <ng-template #loading>
+    <app-loader></app-loader>
+  </ng-template>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item *ngIf="(vendor);else loading">
+          <ion-text class="vendorText">{{vendor.name|uppercase}}</ion-text>
+          <span class="fa" *ngFor="let n of vendor.ratingsClass" 
+          [ngClass]="{'fa-star': n.fa_star , 'checked': n.checked , 'fa-star-half-full': n.fa_star_half }"></span>
+          <ion-text class="rating">{{vendor.ratings}}</ion-text>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-margin-horizontal">
+        <ion-label class="categories"><u>Categories</u></ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row  *ngIf="(category);else loading">
+      <ion-col size="4.7" class="ion-margin-horizontal" *ngFor="let cat of category" (click)="loadDishesByCategory(cat)">
+        <ion-img src="../../../assets/{{cat.name}}.png"></ion-img>
+        <ion-label class="ion-margin-vertical">{{cat.name}}</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item lines="none">
+            <ion-text slot="start" class="category_name">
+              {{selectedCategory?selectedCategory.name:'All Dishes'}}
+            </ion-text>
+            <ion-toggle [ngModel]="toggleValue" [checked]="toggleValue" (ngModelChange)="filterDishType($event)"></ion-toggle>
+            <ion-text style="margin-left: 10px;">Veg</ion-text>
+          </ion-item>
+          <!-- <ion-list-header>
+              {{selectedCategory?selectedCategory.name:'All Dishes'}}
+          </ion-list-header> -->
+          <span style="display: inline;"></span>
+          <ion-item *ngFor="let dish of loadedDishes" class="ion-margin-vertical">
+            <ion-thumbnail slot="start">
+              <ion-img [src]="dish.path"></ion-img>
+            </ion-thumbnail>
+            <ion-label>{{dish.name}}</ion-label>
+            <ion-text>{{dish.price|currency:"₹"}}</ion-text>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  
+  <!-- <ng-template #loading>
     <app-loader></app-loader>
   </ng-template>
   <ion-list *ngIf="(menu$|async);else loading">
     <ion-list-header>
-      Today's menu for {{(vendor$ |async)?.name}}
+      Today's menu for {{(vendor)?.name}}
     </ion-list-header>
 
     <ion-item *ngFor="let dish of menu$|async" (click)="orderDish(dish)">
@@ -24,6 +76,6 @@
       <span slot="end" class="veg" *ngIf="dish.veg"></span>
       <span slot="end" class="nonveg" *ngIf="!dish.veg"></span>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
 
 </ion-content>

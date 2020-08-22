@@ -1,16 +1,24 @@
-<app-header [title]="'Menu'"></app-header>
+<app-header [title]="'FoodOn HungerGone!'"></app-header>
 
 <ion-content [fullscreen]="true">
   <ng-template #loading>
     <app-loader></app-loader>
   </ng-template>
-  <ion-list *ngIf="(vendors$|async);else loading">
-    <ion-list-header>
+  <ion-list no-lines class="ion-margin-horizontal" *ngIf="(vendors);else loading">
+    <ion-list-header class="ion-margin-vertical"> 
       Choose a Vendor
     </ion-list-header>
-
-    <ion-item *ngFor="let vendor of vendors$|async" (click)="loadVendorMenu(vendor)">
-      <ion-label>{{vendor.name}}</ion-label>
-    </ion-item>
+    <div *ngFor="let vendor of vendors" [routerLink]="['/tabs/menu',vendor.vendorId]">
+        <ion-item lines="none"> 
+          <ion-img class="images" src="../../assets/{{vendor.name}}.png"></ion-img>
+          <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+        </ion-item>  
+        <ion-item lines="none">
+          <ion-text class="ion-text-sm-uppercase ion-margin-vertical" 
+          [ngClass]="{'shri': vendor.name == 'Shri Sai', 'palkhi': vendor.name == 'Palkhi', 'dominos': vendor.name == 'Dominos', 'green': vendor.name == 'Green Nest'}">{{vendor.name | uppercase}}</ion-text>
+          <span *ngFor = 'let n of vendor.ratingsClass' class="fa" [ngClass]="{'fa-star': n.fa_star , 'checked': n.checked , 'fa-star-half-full': n.fa_star_half }"></span>
+          <ion-text class="rating">{{vendor.ratings}}</ion-text>     
+        </ion-item>
+    </div>
   </ion-list>
 </ion-content>
