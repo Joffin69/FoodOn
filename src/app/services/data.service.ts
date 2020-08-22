@@ -14,6 +14,7 @@ export class DataService {
   vendorData: object;
   categories: object[];
   dishes: object[];
+  cartArray = [];
   newDishesUpdated = new Subject<{dishes: object[]}>();
   recDishesUpdated = new Subject<{dishes: object[]}>();
   vendorsUpdated = new Subject<{vendors: object[]}>();

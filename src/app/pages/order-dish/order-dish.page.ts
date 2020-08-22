@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DataService } from 'src/app/services/data.service';
 import { Observable } from 'rxjs';
 import { ToastController } from '@ionic/angular';
+
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-order-dish',
@@ -10,19 +11,21 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./order-dish.page.scss'],
 })
 export class OrderDishPage implements OnInit {
-  recommendedDishes$: Observable<any>;
-
-  constructor() { }
+  cartArray = [];
+  constructor(private dataService: DataService, private router: Router) { }
 
   ngOnInit() {
+    this.cartArray = this.dataService.cartArray;
+    this.setCartArray();
+  }
 
-    // this.activatedRoute.queryParams.subscribe(param => {
-    //   if (!param.id) {
-    //     return this.router.navigate(["tabs"]);
-    //   }
-    //   this.loadDish(param.id);
-    // })
-
+  setCartArray() {
+    if (this.cartArray.length >= 1) {
+      for (const dish of this.cartArray) {
+        dish.totalAmount = dish.itemsAdded * dish.price;
+      }
+    }
+    console.log(this.cartArray);
   }
 
   // async loadDish(dish) {

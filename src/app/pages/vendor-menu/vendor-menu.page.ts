@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { Observable, Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-vendor-menu',
   templateUrl: './vendor-menu.page.html',
@@ -19,6 +20,8 @@ export class VendorMenuPage implements OnInit {
   categorySub: Subscription;
   dishSub: Subscription;
   toggleValue = false;
+  dishesAdded = [];
+  orderedDishes = [];
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private dataService: DataService) { }
 
@@ -31,8 +34,7 @@ export class VendorMenuPage implements OnInit {
     // })
     this.activatedRoute.paramMap.subscribe(paramMap => {
       if (!paramMap.has('vendorId')) {
-        // redirect
-        return;
+        return this.router.navigate(['tabs']);
       }
       this.vendorId = paramMap.get('vendorId');
     });
@@ -63,11 +65,22 @@ export class VendorMenuPage implements OnInit {
 
   loadDishesByCategory(category) {
     this.selectedCategory = category;
-
+    this.loadedDishes = [...this.dishes.filter((dish) => {
+      return dish.categoryId === this.selectedCategory.categoryId;
+    })];
   }
 
   filterDishType(event) {
     if (event === true) {
+      if (this.selectedCategory) {
+        this.loadedDishes = [...this.dishes.filter((dish) => {
+          return dish.categoryId === this.selectedCategory.categoryId;
+        })];
+        this.loadedDishes = [...this.loadedDishes.filter((dish) => {
+          return dish.type === 'Veg';
+        })];
+        return;
+      }
       this.loadedDishes = [...this.dishes.filter((dish) => {
         return dish.type === 'Veg';
       })];
@@ -75,6 +88,20 @@ export class VendorMenuPage implements OnInit {
       this.loadedDishes = [...this.dishes.filter((dish) => {
         return dish.type !== 'All';
       })];
+      if (this.selectedCategory) {
+        this.loadedDishes = [...this.dishes.filter((dish) => {
+          return dish.categoryId === this.selectedCategory.categoryId;
+        })];
+      }
+    }
+  }
+
+  isRequired() {
+    if (this.vendor) {
+      if (this.vendor.name === 'Shri Sai' || this.vendor.name === 'Palkhi') {
+        return true;
+      }
+      return false;
     }
   }
 
@@ -105,16 +132,61 @@ export class VendorMenuPage implements OnInit {
     this.vendor.ratingsClass = ratingsClass;
   }
 
+  addToCart(dish) {
+    let sameObj = [];
+    if (!this.dishesAdded.length) {
+      dish.itemsAdded = 1;
+      this.dishesAdded.push(dish);
+    }
+    else {
+      sameObj = this.dishesAdded.filter(dishes => {
+        return dishes.fId === dish.fId;
+      });
+      if (sameObj.length) {
+        sameObj[0].itemsAdded += 1;
+        this.dishesAdded = this.dishesAdded.filter(dishes => {
+          return dishes.fId !== dish.fId;
+        });
+        this.dishesAdded.push(sameObj[0]);
+      } else {
+        dish.itemsAdded = 1;
+        this.dishesAdded.push(dish);
+      }
+    }
+    this.dataService.cartArray = this.dishesAdded;
+    console.log(this.dishesAdded);
+    this.orderedDishes.push(dish);
+  }
 
+  removeFromCart(dish) {
+    let sameObj = [];
+    if (this.dishesAdded.length) {
+      sameObj = this.dishesAdded.filter(dishes => {
+        return dishes.fId === dish.fId;
+      });
+      if (sameObj.length) {
+        if (sameObj[0].itemsAdded > 1) {
+          sameObj[0].itemsAdded -= 1;
+          this.dishesAdded = this.dishesAdded.filter(dishes => {
+            return dishes.fId !== dish.fId;
+          });
+          this.dishesAdded.push(sameObj[0]);
+        } else if (sameObj[0].itemsAdded === 1) {
+          this.dishesAdded = this.dishesAdded.filter(dishes => {
+            return dishes.fId !== dish.fId;
+          });
+        }
+      }
+      this.dataService.cartArray = this.dishesAdded;
+      console.log(this.dishesAdded);
+    }
+    this.orderedDishes = this.orderedDishes.filter(dishes => {
+      return dishes.fId !== dish.fId;
+    });
+  }
 
-  orderDish(dish) {
-
-    // this.router.navigate(["order-dish"], {
-    //   queryParams: {
-    //     id: dish.id
-    //   }
-    // })
-
+  goToCart() {
+    this.router.navigate(['/order-dish']);
   }
 
 }

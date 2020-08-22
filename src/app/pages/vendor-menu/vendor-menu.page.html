@@ -6,6 +6,17 @@
     <ion-title>
       FoodOn HungerGone!
     </ion-title>
+    <!-- <ion-buttons collapse="true" slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
+        <ion-badge color="success">44</ion-badge>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-button slot="end" icon-only (click)="goToCart()">
+      <ion-badge *ngIf="orderedDishes.length" color="danger">{{ orderedDishes.length }}</ion-badge>
+      <ion-icon name="cart-outline"></ion-icon>
+    </ion-button>
+    <!-- <ion-icon slot="end" name="cart-outline"></ion-icon> -->
   </ion-toolbar>
 </ion-header>
 
@@ -42,22 +53,29 @@
             <ion-text slot="start" class="category_name">
               {{selectedCategory?selectedCategory.name:'All Dishes'}}
             </ion-text>
-            <ion-toggle [ngModel]="toggleValue" [checked]="toggleValue" (ngModelChange)="filterDishType($event)"></ion-toggle>
-            <ion-text style="margin-left: 10px;">Veg</ion-text>
+            <ion-toggle [ngModel]="toggleValue" [checked]="toggleValue" (ngModelChange)="filterDishType($event)" *ngIf="isRequired()"></ion-toggle>
+            <ion-text style="margin-left: 10px;" *ngIf="isRequired()">Veg</ion-text>
           </ion-item>
-          <!-- <ion-list-header>
-              {{selectedCategory?selectedCategory.name:'All Dishes'}}
-          </ion-list-header> -->
-          <span style="display: inline;"></span>
-          <ion-item *ngFor="let dish of loadedDishes" class="ion-margin-vertical">
-            <ion-thumbnail slot="start">
-              <ion-img [src]="dish.path"></ion-img>
-            </ion-thumbnail>
-            <ion-label>{{dish.name}}</ion-label>
-            <ion-text>{{dish.price|currency:"₹"}}</ion-text>
-          </ion-item>
+          <div *ngFor="let dish of loadedDishes" class="ion-margin-vertical">
+            <ion-item lines="none">
+              <ion-thumbnail slot="start">
+                <ion-img [src]="dish.path"></ion-img>
+              </ion-thumbnail>
+              <ion-icon slot="end" name="add-circle-outline" style="color:green" (click)="addToCart(dish)"></ion-icon>
+              <ion-icon slot="end" name="remove-circle-outline" style="color:red" (click)="removeFromCart(dish)"></ion-icon>
+            </ion-item>
+            <ion-item class="dish-details">
+              <ion-text>{{dish.name}}</ion-text>
+              <ion-text slot="end">{{dish.price|currency:"₹"}}</ion-text>
+            </ion-item>
+            
+          </div>
+          
         </ion-list>
       </ion-col>
+    </ion-row>
+    <ion-row *ngIf="(!loadedDishes || loadedDishes.length <= 0)">
+      <ion-text class="ion-margin-vertical ion-margin-horizontal">No dishes for the selected category</ion-text>
     </ion-row>
   </ion-grid>
   

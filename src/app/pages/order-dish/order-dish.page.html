@@ -1,14 +1,28 @@
-<!-- <ion-header>
+<ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Oder {{(dish$ | async)?.name}}</ion-title>
+    <ion-title>FoodOn HungerGone !</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card color="primary">
+  <ion-item lines="none" class="main-heading">
+    <ion-label slot="start">Your Cart</ion-label>
+    <ion-icon name="cart-outline"></ion-icon>
+  </ion-item>
+  <hr style="background-color: white;" class="ion-margin-horizontal">
+  <ion-list *ngIf="cartArray.length">
+    <ion-item *ngFor="let dish of cartArray">
+      <ion-text>{{dish.name}}</ion-text>
+      <ion-text slot="end">{{dish.totalAmount}}</ion-text>
+    </ion-item>
+  </ion-list>
+
+  <ion-text><u>Add cooking instructions (Optional)</u></ion-text>
+  <ion-text *ngIf="!cartArray.length" class="ion-margin-horizontal">Your Cart is empty !</ion-text>
+  <!-- <ion-card color="primary">
     <ion-card-header>
       <ion-card-subtitle>{{(dish$ | async)?.name}}</ion-card-subtitle>
       <ion-card-title>{{(dish$ | async)?.price}}₹</ion-card-title>
@@ -26,24 +40,7 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-card-content>
-  </ion-card>
-
-  <ion-title class="section-title">You may like these dishes!</ion-title>
-  <ion-slides pager="true" [options]="slideOpts">
-    <ion-slide *ngFor="let dish of recommendedDishes$|async">
-      <ion-card color="primary">
-        <img alt="" srcset="">
-        <ion-card-header>
-          <ion-card-subtitle>{{dish.name}}</ion-card-subtitle>
-          <ion-card-title>{{dish.price}}₹</ion-card-title>
-        </ion-card-header>
-
-        <ion-card-content>
-          {{dish.description}}
-        </ion-card-content>
-      </ion-card>
-    </ion-slide>
-  </ion-slides>
+  </ion-card> -->
 
 
-</ion-content> -->
+</ion-content>

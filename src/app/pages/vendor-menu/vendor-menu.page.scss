@@ -36,3 +36,16 @@
 .category_name {
     font-size: 20px;
 }
+
+ion-button {
+	ion-badge {
+		position: absolute;
+		top: -0rem;
+		right: -0rem;
+		opacity: 0.9;
+
+		& ~ ion-icon {
+			margin-right: 1.2rem;
+		}
+	}
+}
