@@ -6,15 +6,15 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-grid style="margin-top: 50%;">
+<ion-content style="background-color: green;">
+  <ion-grid style="margin-top: 50%">
     <ion-row *ngIf="order">
       <ion-col class="ion-text-center">
-        <ion-icon name="happy-outline" style="font-size: 40px;"></ion-icon>
-        <ion-text style="display: block; font-size: 20px;" class="ion-text-center ion-margin-vertical">Yay ! Its Done.</ion-text>
-        <ion-text style="display: block; font-size: 20px;" class="ion-text-center ion-margin-vertical">Your order has been placed sucessfully!</ion-text>
-        <ion-text style="display: block; font-size: 20px;" class="ion-text-center">Your order ID - {{order.orderId}}</ion-text>
-        <ion-text style="display: block; font-size: 17px;" class="ion-text-center">A confirmation message has been sent to your number</ion-text>
+        <ion-icon name="happy-outline" style="font-size: 120px;color:white"></ion-icon>
+        <ion-text style="display: block; font-size: 30px;color:white" class="ion-text-center ion-margin-vertical">Yay !!! It's Done.</ion-text>
+        <ion-text style="display: block; font-size: 20px;color:white" class="ion-text-center ion-margin-vertical">Your order has been placed sucessfully!</ion-text>
+        <ion-text style="display: block; font-size: 20px;color:white" class="ion-text-center">Your order ID - {{order.orderId}}</ion-text>
+        <ion-text style="display: block; font-size: 17px;color:white" class="ion-text-center">A confirmation message has been sent to your number</ion-text>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="!order">
@@ -22,9 +22,17 @@
         <ion-text style="display: block; font-size: 28px;" class="ion-text-center">There are no orders.</ion-text>
       </ion-col>
     </ion-row>
-    <ion-row class="ion-margin-vertical">
+    <!-- <ion-row class="ion-margin-vertical">
       <ion-col>
         <ion-text style="display: block; font-size: 25px;" class="ion-text-center">Go back <span style="color:blue" [routerLink]="['/tabs']"><u>Home</u></span></ion-text>
+      </ion-col>
+    </ion-row> -->
+    <ion-row class="ion-margin-vertical">
+      <ion-col class="ion-text-center">
+        <!-- <ion-text style="display: block; font-size: 25px;" class="ion-text-center">Go back <span style="color:blue" [routerLink]="['/tabs']"><u>Home</u></span></ion-text> -->
+        <ion-button [routerLink]="['/tabs']">
+          Continue <ion-icon style="margin-left: 10px;" name="arrow-forward-circle-sharp"></ion-icon>
+        </ion-button>
       </ion-col>
     </ion-row>
     <!-- <ion-row class="ion-margin-vertical">
