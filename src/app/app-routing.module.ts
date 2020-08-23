@@ -20,6 +20,7 @@ const routes: Routes = [
   {
     path: 'vendor-menu',
     loadChildren: () => import('./pages/vendor-menu/vendor-menu.module').then( m => m.VendorMenuPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'order-dish',
