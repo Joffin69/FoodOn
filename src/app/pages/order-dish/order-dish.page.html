@@ -25,10 +25,20 @@
     <ion-row>
       <ion-col>
         <ion-list *ngIf="cartArray.length">
-          <ion-item *ngFor="let dish of cartArray">
-            <ion-text>{{dish.name}}</ion-text>
-            <ion-text slot="end">{{dish.totalAmount|currency:"₹"}}</ion-text>
-          </ion-item>
+          <div *ngFor="let dish of cartArray">
+            <ion-item lines="none">
+              <ion-text>{{dish.name}}</ion-text>
+              <!-- <ion-text slot="end">{{dish.totalAmount|currency:"₹"}}</ion-text> -->
+              <!-- <ion-icon color="danger" slot="end" name="trash-outline"></ion-icon> -->
+              <ion-icon slot="end" name="add-circle-outline" style="color:green" (click)="addToCart(dish)"></ion-icon>
+              <ion-text slot="end">{{dish.itemsAdded}}</ion-text>
+              <ion-icon slot="end" name="remove-circle-outline" style="color:red" (click)="removeFromCart(dish)"></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-text slot="start">{{dish.price|currency:"₹"}}</ion-text>
+              <ion-text slot="end">{{dish.totalAmount|currency:"₹"}}</ion-text>
+            </ion-item>
+          </div>
         </ion-list>
       </ion-col>
     </ion-row>
@@ -83,7 +93,7 @@
     </ion-row>
   </ion-grid>
 
-  <div id="footer">
+  <!-- <div [ngClass]="{'footer':!cartArray.length}">
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -106,9 +116,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    
-    
-  </div>
+  </div> -->
 
   <!-- <ion-card color="primary">
     <ion-card-header>
@@ -130,3 +138,30 @@
     </ion-card-content>
   </ion-card> -->
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <hr class="ion-margin-horizontal" style="background-color: white;">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="ion-margin-horizontal">
+          <form #form="ngForm">
+          <ion-label>Pay Using</ion-label>
+          <ion-select placeholder="Select One" ngModel name="pay_option" required>
+            <ion-select-option value="DC">Debit Card</ion-select-option>
+            <ion-select-option value="NB">Net Banking</ion-select-option>
+            <ion-select-option value="UPI">UPI</ion-select-option>
+          </ion-select>
+          </form>
+        </ion-col>
+        <ion-col class="ion-margin-horizontal">
+          <ion-button style="width: 100%;" color="primary" [disabled]="form.invalid || cookingForm.invalid || !cartArray.length" (click)="placeOrder()">Pay Now</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

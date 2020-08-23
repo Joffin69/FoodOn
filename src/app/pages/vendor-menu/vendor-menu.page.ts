@@ -17,11 +17,11 @@ export class VendorMenuPage implements OnInit {
   dishes: any;
   loadedDishes: any;
   selectedCategory: any;
+  showButtons = false;
   categorySub: Subscription;
   dishSub: Subscription;
   toggleValue = false;
   dishesAdded = [];
-  orderedDishes = [];
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private dataService: DataService) { }
 
@@ -155,7 +155,6 @@ export class VendorMenuPage implements OnInit {
     }
     this.dataService.cartArray = this.dishesAdded;
     console.log(this.dishesAdded);
-    this.orderedDishes.push(dish);
   }
 
   removeFromCart(dish) {
@@ -180,9 +179,14 @@ export class VendorMenuPage implements OnInit {
       this.dataService.cartArray = this.dishesAdded;
       console.log(this.dishesAdded);
     }
-    this.orderedDishes = this.orderedDishes.filter(dishes => {
-      return dishes.fId !== dish.fId;
-    });
+  }
+
+  getItemsAdded() {
+    const totalItems = this.dishesAdded.reduce((amount, dish) => {
+      amount = amount + dish.itemsAdded || dish.itemsAdded;
+      return amount;
+    }, 0);
+    return totalItems;
   }
 
   goToCart() {

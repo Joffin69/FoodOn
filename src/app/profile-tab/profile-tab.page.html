@@ -3,15 +3,16 @@
   <ng-template #loading>
     <app-loader></app-loader>
   </ng-template>
-  <ion-card *ngIf="(user$ | async);else loading">
+  <ion-card *ngIf="(userInfo);else loading">
     <ion-card-header>
-      <ion-card-title>User Logged In</ion-card-title>
-      <ion-card-subtitle>{{(user$ | async)?.name}}</ion-card-subtitle>
-      <ion-card-subtitle>{{(user$ | async)?.phone}}</ion-card-subtitle>
+      <ion-card-title>{{userInfo.name}}</ion-card-title>
+      <ion-card-subtitle>{{userInfo.empId}}</ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
-      <ion-button fill="clear" (click)="logout()">Logout <ion-icon slot="end" name="arrow-forward"></ion-icon>
+      <ion-label style="display: block;">Email ID - {{userInfo.emailId}}</ion-label>
+      <ion-label style="display: block;" class="ion-margin-vertical">Mobile Number - {{userInfo.phone}}</ion-label>
+      <ion-button style="display: block;" class="ion-margin-horizontal" fill="clear" (click)="logout()">Logout <ion-icon slot="end" name="arrow-forward"></ion-icon>
       </ion-button>
     </ion-card-content>
   </ion-card>

@@ -11,6 +11,8 @@ router.post("/login", UserController.userLogin);
 
 router.post("/saveUser", UserController.saveUserData);
 
+router.post("/getUserInfo", UserController.getUserInfo);
+
 // router.get("/getUsers", UserController.getUsers);
 
 // router.post("/deleteUser", UserController.deleteUser);

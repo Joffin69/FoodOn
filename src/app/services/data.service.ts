@@ -15,12 +15,16 @@ export class DataService {
   categories: object[];
   dishes: object[];
   cartArray = [];
+  orders: any;
+  placedOrder: any;
   newDishesUpdated = new Subject<{dishes: object[]}>();
   recDishesUpdated = new Subject<{dishes: object[]}>();
   vendorsUpdated = new Subject<{vendors: object[]}>();
   vendorDataUpdated = new Subject<{vendor: any}>();
   categoriesUpdated = new Subject<{category: any}>();
   dishesUpdated = new Subject<{dishes: any}>();
+  orderDataUpdated = new Subject<{orders: any}>();
+  placedOrderDataUpdated = new Subject<{orders: any}>();
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -46,6 +50,14 @@ export class DataService {
 
   getDishesUpdateListener() {
     return this.dishesUpdated.asObservable();
+  }
+
+  getOrdersUpdateListener() {
+    return this.orderDataUpdated.asObservable();
+  }
+
+  getPlacedOrdersUpdateListener() {
+    return this.placedOrderDataUpdated.asObservable();
   }
 
   getAllVendors() {
@@ -126,6 +138,26 @@ export class DataService {
       this.dishesUpdated.next({dishes: this.dishes});
     }, error => {
       console.log('Could not retrieve Vendor data.');
+    });
+  }
+
+  getAllOrders() {
+    this.http.get<{message: string, result: any}>('http://localhost:3000/api/data/getAllOrders')
+    .subscribe((data) => {
+      this.orders = data.result;
+      this.orderDataUpdated.next({orders: this.orders});
+    }, error => {
+      console.log('An error occurred while getting all transactions');
+    });
+  }
+
+  placeOrder(order) {
+    this.http.post<{message: string, result: any}>('http://localhost:3000/api/data/placeOrder', order)
+    .subscribe((data) => {
+      this.placedOrder = data.result;
+      this.placedOrderDataUpdated.next({orders: this.placedOrder});
+    }, error => {
+      console.log('Could not place order. PLease try again !');
     });
   }
 }

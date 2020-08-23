@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
@@ -8,14 +8,20 @@ import { switchMap } from 'rxjs/operators';
   templateUrl: 'profile-tab.page.html',
   styleUrls: ['profile-tab.page.scss']
 })
-export class ProfilePage {
+export class ProfilePage implements OnInit{
 
-  // user$: Observable<any>
+  userSub: Subscription;
+  userInfo: any;
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
     // this.user$ = this.authService.getUserInfo();
     // this.user$.subscribe(x => console.log(x));
+    this.authService.getUserInfo();
+    this.userSub = this.authService.getUserInfoSub()
+    .subscribe((userInfo: {user: any}) => {
+      this.userInfo = userInfo.user[0];
+    });
   }
   logout() {
     this.authService.logout();

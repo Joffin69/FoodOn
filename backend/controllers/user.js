@@ -5,7 +5,7 @@ const User = require("../models/user");
 
 exports.userLogin = (req, res, next) => {
     let fetchedUser;
-    User.findOne({empId: req.body.empId})
+    User.findOne({empId: req.body.empId},{_id:0})
     .then(user => {
       if (!user) {
         return res.status(404).json({
@@ -31,6 +31,12 @@ exports.userLogin = (req, res, next) => {
         user: fetchedUser
       });
     })
+    .catch(error => {
+      console.log(error);
+      res.status(404).json({
+        message: 'Something went wrong. Please logout and try again!'
+      });
+    })
 }
 
 exports.createUser = (req, res, next) => {
@@ -53,12 +59,15 @@ exports.createUser = (req, res, next) => {
       .catch(error => {
         console.log(error);
         res.status(404).json({
-          message: 'Invalid credentials !'
+          message: 'Invalid data. Please try again !'
         })
       })
     })
     .catch(error => {
       console.log(error);
+      res.status(404).json({
+        message: 'Something went wrong. Please logout and try again!'
+      });
     })
 }
 
@@ -74,14 +83,13 @@ exports.saveUserData = (req, res, next) => {
     User.findOneAndUpdate({empId: empId},upsertData,{new: true})
     .then(result => {
         if(result.empId === empId && (result.name !== 'xyz' || result.name !== undefined)) {
-            console.log(result);
+            delete result._id;
             res.status(201).json({
                 message: 'User data has been successfully saved.',
                 result: result
             });
             return;
         }
-        console.log(result);
         res.status(404).json({
             message: 'Data save has failed. PLease logout and try again !'
         });
@@ -89,7 +97,30 @@ exports.saveUserData = (req, res, next) => {
     .catch(error => {
         console.log(error);
         res.status(404).json({
-            message: 'Invalid credentials !'
-        })
+          message: 'Something went wrong. Please logout and try again!'
+        });
     });
+}
+
+exports.getUserInfo = (req, res, next) => {
+  const empId = req.body.empId; 
+  User.find({empId: empId},{_id:0})
+  .then(result => {
+      if(result) {
+          res.status(201).json({
+              message: 'User data has been successfully retrieved.',
+              result: result
+          });
+          return;
+      }
+      res.status(404).json({
+          message: 'Orders list could not be retrieved successfully !'
+      });
+  })
+  .catch(error => {
+      console.log(error);
+      res.status(404).json({
+        message: 'Something went wrong. Please logout and try again!'
+      });
+  });
 }

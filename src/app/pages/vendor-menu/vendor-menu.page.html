@@ -6,17 +6,10 @@
     <ion-title>
       FoodOn HungerGone!
     </ion-title>
-    <!-- <ion-buttons collapse="true" slot="end">
-      <ion-button>
-        <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
-        <ion-badge color="success">44</ion-badge>
-      </ion-button>
-    </ion-buttons> -->
     <ion-button slot="end" icon-only (click)="goToCart()">
-      <ion-badge *ngIf="orderedDishes.length" color="danger">{{ orderedDishes.length }}</ion-badge>
+      <ion-badge *ngIf="dishesAdded.length" color="danger">{{ getItemsAdded() }}</ion-badge>
       <ion-icon name="cart-outline"></ion-icon>
     </ion-button>
-    <!-- <ion-icon slot="end" name="cart-outline"></ion-icon> -->
   </ion-toolbar>
 </ion-header>
 
@@ -68,9 +61,7 @@
               <ion-text>{{dish.name}}</ion-text>
               <ion-text slot="end">{{dish.price|currency:"₹"}}</ion-text>
             </ion-item>
-            
           </div>
-          
         </ion-list>
       </ion-col>
     </ion-row>

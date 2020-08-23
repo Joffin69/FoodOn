@@ -18,7 +18,9 @@ export class AuthService {
   private tokenTimer: any;
   private token: string;
   private empId: string;
+  userInfo: any;
   private userAuthStatusSub = new Subject<boolean>();
+  private userInfoSub = new Subject<{user: any}>();
 
   constructor(private http: HttpClient, private router: Router) {
     // this.user = firebaseAuth.authState;
@@ -38,6 +40,10 @@ export class AuthService {
 
   getAuthSub() {
     return this.userAuthStatusSub.asObservable();
+  }
+
+  getUserInfoSub() {
+    return this.userInfoSub.asObservable();
   }
 
   // signup(email: string, password: string) {
@@ -92,7 +98,7 @@ export class AuthService {
     this.http.post<{message: string, token: string, expiresIn: number, user: any}>('http://localhost:3000/api/user/login', user)
     .subscribe(result => {
       if (result && result.token) {
-        const token = result.token;
+        this.token = result.token;
         const expireDuration = result.expiresIn;
         this.empId = result.user.empId;
         this.isUserAuthnticated = true;
@@ -101,7 +107,7 @@ export class AuthService {
         const expirationDate = new Date(
           new Date().getTime() + expireDuration * 1000
         );
-        this.saveAuthData(result.user.empId, token, expirationDate);
+        this.saveAuthData(result.user.empId, this.token, expirationDate);
         if (result.user.name === 'xyz') {
           this.router.navigate(['/setup-profile']);
         } else {
@@ -161,6 +167,16 @@ export class AuthService {
     //   }
     //   return of(null);
     // }));
+    const userInfo = {
+      empId: this.getAuthData().empId
+    };
+    this.http.post<{message: string, result: any}>('http://localhost:3000/api/user/getUserInfo', userInfo)
+    .subscribe((data) => {
+      this.userInfo = data.result;
+      this.userInfoSub.next({user: this.userInfo});
+    }, error => {
+      console.log('An error occurred while getting all transactions');
+    });
   }
 
   loginWithGooogle(phone) {
@@ -171,6 +187,10 @@ export class AuthService {
     // this.firebaseAuth.signOut().then(() => {
     //   this.router.navigate(['/login']);
     // });
+    this.isUserAuthnticated = false;
+    this.userAuthStatusSub.next(false);
+    this.clearAuthData();
+    this.router.navigate(['/login']);
   }
 }
 

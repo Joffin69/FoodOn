@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-header>
+      <ion-title>FoodOn HungerGone !</ion-title>
+    </ion-header>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid style="margin-top: 50%;">
+    <ion-row *ngIf="order">
+      <ion-col class="ion-text-center">
+        <ion-icon name="happy-outline" style="font-size: 40px;"></ion-icon>
+        <ion-text style="display: block; font-size: 20px;" class="ion-text-center ion-margin-vertical">Yay ! Its Done.</ion-text>
+        <ion-text style="display: block; font-size: 20px;" class="ion-text-center ion-margin-vertical">Your order has been placed sucessfully!</ion-text>
+        <ion-text style="display: block; font-size: 20px;" class="ion-text-center">Your order ID - {{order.orderId}}</ion-text>
+        <ion-text style="display: block; font-size: 17px;" class="ion-text-center">A confirmation message has been sent to your number</ion-text>
+        <ion-text style="display: block; font-size: 17px;" class="ion-text-center">Estimated Time of delivery: {{order.estimatedTime}}</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="!order">
+      <ion-col>
+        <ion-text style="display: block; font-size: 28px;" class="ion-text-center">There are no orders.</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin-vertical">
+      <ion-col>
+        <ion-text style="display: block; font-size: 25px;" class="ion-text-center">Go back <span style="color:blue" [routerLink]="['/tabs']"><u>Home</u></span></ion-text>
+      </ion-col>
+    </ion-row>
+    <!-- <ion-row class="ion-margin-vertical">
+      <ion-col class="ion-text-center">
+        Yay ! Its Done.
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-text>Your order has been placed sucessfully!</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-text>Your order ID - {{order.id}}</ion-text>
+      </ion-col>
+    </ion-row> -->
+  </ion-grid>
+</ion-content>

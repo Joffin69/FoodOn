@@ -17,4 +17,8 @@ router.post("/getCategoriesForVendor", DataController.getCategoriesForVendor);
 
 router.post("/getVendorDishes", DataController.getVendorDishes);
 
+router.get("/getAllOrders", DataController.getAllOrders);
+
+router.post("/placeOrder", DataController.placeOrder);
+
 module.exports = router;
