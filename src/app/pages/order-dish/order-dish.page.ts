@@ -146,6 +146,7 @@ export class OrderDishPage implements OnInit {
       buttons: [{
         text: 'OK',
         handler: () => {
+          this.dataService.cartArray = [];
           this.router.navigate(['/success']);
         }
       }]

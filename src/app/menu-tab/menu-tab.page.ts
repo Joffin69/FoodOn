@@ -28,6 +28,7 @@ export class MenuPage implements OnInit{
 
   goToVendor(vendor) {
     this.dataService.vendorId = vendor.vendorId;
+    this.dataService.cartArray = [];
     this.router.navigate(['/vendor-menu']);
   }
 
