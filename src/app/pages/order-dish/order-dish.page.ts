@@ -12,6 +12,12 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class OrderDishPage implements OnInit {
   cartArray = [];
+  textReq = false;
+  textInput = '';
+  totalAmount = 0;
+  taxAmount = 0;
+  finalAmount = 0;
+
   constructor(private dataService: DataService, private router: Router) { }
 
   ngOnInit() {
@@ -25,7 +31,17 @@ export class OrderDishPage implements OnInit {
         dish.totalAmount = dish.itemsAdded * dish.price;
       }
     }
-    console.log(this.cartArray);
+    this.calculateAmountToPay();
+  }
+
+  calculateAmountToPay() {
+    this.totalAmount = this.cartArray.reduce((amount, dish) => {
+      amount = amount + dish.totalAmount || dish.totalAmount;
+      return amount;
+    }, 0);
+    console.log(this.totalAmount);
+    this.taxAmount = Math.floor(0.3 * this.totalAmount);
+    this.finalAmount = this.totalAmount + this.taxAmount;
   }
 
   // async loadDish(dish) {
