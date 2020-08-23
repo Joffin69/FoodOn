@@ -12,6 +12,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 import { ErrorInterceptor } from './error.interceptor';
+import { AuthInterceptor } from './auth.interceptor';
 // import { AngularFireModule } from '@angular/fire';
 // import { AngularFireAuthModule } from '@angular/fire/auth';
 
@@ -32,7 +33,8 @@ import { ErrorInterceptor } from './error.interceptor';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
