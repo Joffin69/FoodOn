@@ -59,7 +59,7 @@ export class OrderDishPage implements OnInit {
       return amount;
     }, 0);
     console.log(this.totalAmount);
-    this.taxAmount = Math.floor(0.3 * this.totalAmount);
+    this.taxAmount = Math.floor(0.15 * this.totalAmount);
     this.finalAmount = this.totalAmount + this.taxAmount;
   }
 
