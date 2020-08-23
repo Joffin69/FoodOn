@@ -18,6 +18,10 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'vendor-menu',
+    loadChildren: () => import('./pages/vendor-menu/vendor-menu.module').then( m => m.VendorMenuPageModule),
+  },
+  {
     path: 'order-dish',
     loadChildren: () => import('./pages/order-dish/order-dish.module').then(m => m.OrderDishPageModule),
     canActivate: [AuthGuard]

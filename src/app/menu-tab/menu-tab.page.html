@@ -8,7 +8,7 @@
     <ion-list-header class="ion-margin-vertical"> 
       Choose a Vendor
     </ion-list-header>
-    <div *ngFor="let vendor of vendors" [routerLink]="['/tabs/menu',vendor.vendorId]">
+    <div *ngFor="let vendor of vendors" (click)="goToVendor(vendor)">
         <ion-item lines="none"> 
           <ion-img class="images" src="../../assets/{{vendor.name}}.png"></ion-img>
           <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>

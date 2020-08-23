@@ -32,12 +32,13 @@ export class VendorMenuPage implements OnInit {
     //   }
     //   this.loadVendorMenu(param.id);
     // })
-    this.activatedRoute.paramMap.subscribe(paramMap => {
-      if (!paramMap.has('vendorId')) {
-        return this.router.navigate(['tabs']);
-      }
-      this.vendorId = paramMap.get('vendorId');
-    });
+    // this.activatedRoute.paramMap.subscribe(paramMap => {
+    //   if (!paramMap.has('vendorId')) {
+    //     return this.router.navigate(['tabs']);
+    //   }
+    //   this.vendorId = paramMap.get('vendorId');
+    // });
+    this.vendorId = this.dataService.vendorId;
     this.loadVendorMenu(this.vendorId);
   }
 

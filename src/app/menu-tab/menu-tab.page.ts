@@ -26,6 +26,11 @@ export class MenuPage implements OnInit{
     });
   }
 
+  goToVendor(vendor) {
+    this.dataService.vendorId = vendor.vendorId;
+    this.router.navigate(['/vendor-menu']);
+  }
+
   getRatingClass() {
     const numArray = [1, 2, 3, 4, 5];
     let ratingsClass = [];

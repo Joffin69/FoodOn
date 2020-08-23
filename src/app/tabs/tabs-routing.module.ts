@@ -22,10 +22,6 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () => import('../menu-tab/menu-tab.module').then( m => m.Tab2PageModule),
-          },
-          {
-            path: ':vendorId',
-            loadChildren: () => import('../pages/vendor-menu/vendor-menu.module').then( m => m.VendorMenuPageModule),
           }
         ]
       },
