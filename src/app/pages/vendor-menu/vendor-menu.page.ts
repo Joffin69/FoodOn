@@ -42,6 +42,10 @@ export class VendorMenuPage implements OnInit {
     this.loadVendorMenu(this.vendorId);
   }
 
+  ionViewWillEnter() {
+    this.dishesAdded = this.dataService.cartArray;
+  }
+
   loadVendorMenu(venordId) {
     // this.vendor$ = this.dataService.getVendor(venordId);
     // this.menu$ = this.dataService.getDishesForVendor(venordId);
