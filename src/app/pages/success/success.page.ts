@@ -14,10 +14,12 @@ export class SuccessPage implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.orderSub = this.dataService.getPlacedOrdersUpdateListener()
-    .subscribe((order: {orders: any}) => {
-      this.order = order.orders;
-    });
+    this.order = this.dataService.placedOrder;
+    this.dataService.cartArray = [];
+    // this.orderSub = this.dataService.getPlacedOrdersUpdateListener()
+    // .subscribe((order: {orders: any}) => {
+    //   this.order = order.orders[0];
+    // });
   }
 
 }
