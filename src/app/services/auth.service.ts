@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 // import { AngularFireAuth } from '@angular/fire/auth';
 // import { Observable, of } from 'rxjs';
 // import { Router } from '@angular/router';
@@ -22,7 +23,7 @@ export class AuthService {
   private userAuthStatusSub = new Subject<boolean>();
   private userInfoSub = new Subject<{user: any}>();
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private alertCtrl: AlertController) {
     // this.user = firebaseAuth.authState;
   }
 
@@ -83,8 +84,19 @@ export class AuthService {
     };
     this.http.post<{message: string, result: object}>('http://localhost:3000/api/user/signup', form)
     .subscribe((result) => {
-      console.log(result);
-      this.router.navigate(['/login']);
+      // console.log(result);
+      this.alertCtrl.create({
+        header: 'Done !',
+        message: 'Your sign in was successfull. Please login to continue.',
+        buttons: [{
+          text: 'OK',
+          handler: () => {
+           this.router.navigate(['/login']);
+          }
+        }]
+      }).then(alertEl => {
+      alertEl.present();
+      });
     }, error => {
       console.log(error);
     });
@@ -130,8 +142,18 @@ export class AuthService {
     userInfo.empId = this.getEmpId();
     this.http.post<{message: string, result: object}>('http://localhost:3000/api/user/saveUser', userInfo)
     .subscribe((result) => {
-      console.log(result);
-      this.router.navigate(['/tabs']);
+      this.alertCtrl.create({
+        header: 'Done !',
+        message: 'Profile setup completed !',
+        buttons: [{
+          text: 'OK',
+          handler: () => {
+            this.router.navigate(['/tabs']);
+          }
+        }]
+      }).then(alertEl => {
+         alertEl.present();
+      });
     }, error => {
       console.log(error);
     });
