@@ -170,12 +170,12 @@ export class HomePage implements OnInit{
     .subscribe((dishesData: {dishes: object[]}) => {
       this.newDishes = dishesData.dishes;
       // console.log(this.newDishes);
-      this.recDishesSub = this.dataService.getrecDishesUpdateListener()
-      .subscribe((recDishes: {dishes: object[]}) => {
-        this.recommendedDishes = recDishes.dishes;
-      }, error => {
-        console.log(error);
-      });
+    }, error => {
+      console.log(error);
+    });
+    this.recDishesSub = this.dataService.getrecDishesUpdateListener()
+    .subscribe((recDishes: {dishes: object[]}) => {
+      this.recommendedDishes = recDishes.dishes;
     }, error => {
       console.log(error);
     });

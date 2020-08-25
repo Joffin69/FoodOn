@@ -46,16 +46,18 @@
             <ion-text slot="start" class="category_name">
               {{selectedCategory?selectedCategory.name:'All Dishes'}}
             </ion-text>
-            <ion-toggle [(ngModel)]="toggleValue" [checked]="toggleValue" (ngModelChange)="filterDishType($event)" *ngIf="isRequired()"></ion-toggle>
+            <ion-toggle name="kiwi" color="success" [(ngModel)]="toggleValue" [checked]="toggleValue" (ngModelChange)="filterDishType($event)" *ngIf="isRequired()"></ion-toggle>
             <ion-text style="margin-left: 10px;" *ngIf="isRequired()">Veg</ion-text>
           </ion-item>
           <div *ngFor="let dish of loadedDishes" class="ion-margin-vertical">
             <ion-item lines="none">
               <ion-thumbnail slot="start">
-                <ion-img [src]="dish.path"></ion-img>
+                <ion-img src="../../../assets/images/{{dish.fId}}.jpg"></ion-img>
               </ion-thumbnail>
-              <ion-icon slot="end" name="add-circle-outline" style="color:green" (click)="addToCart(dish)"></ion-icon>
+              <span slot="start" class="fa fa-star checked"></span>
+              <ion-text slot="start">{{dish.rating}} / 5</ion-text>
               <ion-icon slot="end" name="remove-circle-outline" style="color:red" (click)="removeFromCart(dish)"></ion-icon>
+              <ion-icon slot="end" name="add-circle-outline" style="color:green" (click)="addToCart(dish)"></ion-icon>
             </ion-item>
             <ion-item class="dish-details">
               <ion-text>{{dish.name}}</ion-text>

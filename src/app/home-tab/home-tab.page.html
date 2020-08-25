@@ -11,7 +11,7 @@
   <ion-text class="ion-text-center special">Today's Special</ion-text>
   <ion-slides [options]="slideOpts">
     <ion-slide *ngFor="let dish of newDishes">
-      <ion-img alt="" [src]="dish.path"></ion-img>
+      <ion-img alt="" src="../../assets/images/{{dish.fId}}.jpg"></ion-img>
       <ion-text>{{dish.name}}</ion-text>
       <!-- <ion-card color="primary">
         <img alt="" srcset="">
@@ -29,7 +29,7 @@
   <ion-slides [options]="slideOpts"> 
     <ion-slide *ngFor="let dish of recommendedDishes">
       <!-- <ion-card color="primary"> -->
-        <ion-img alt="" [src]="dish.path"></ion-img>
+        <ion-img alt="" src="../../assets/images/{{dish.fId}}.jpg"></ion-img>
         <ion-text>{{dish.name}}</ion-text>
         <!-- <ion-card-header>
           <ion-card-subtitle>{{dish.name}}</ion-card-subtitle>

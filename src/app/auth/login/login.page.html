@@ -29,7 +29,7 @@
       <ion-input type="password" ngModel name="password" placeholder="Password" required></ion-input>
     </ion-item> 
     <div class="ion-text-center ion-margin-top ion-margin-horizontal">
-      <ion-button  color="primary" size="default" type="submit" expand="block">Login</ion-button>
+      <ion-button  color="primary" size="default" type="submit" expand="block" [disabled]="loginForm.invalid">Login</ion-button>
     </div> 
   </form>
   <ion-text class="ion-text-center">

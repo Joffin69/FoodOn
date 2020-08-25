@@ -25,7 +25,7 @@ exports.getNewDishes = (req, res, next) => {
 }
 
 exports.getRecDishes = (req, res, next) => {
-    Dish.find({rating:{$gt: 4}},{_id:0})
+    Dish.find({rating:{$gte: 4.3}},{_id:0})
     .then(data => {
       if (!data) {
         return res.status(404).json({
