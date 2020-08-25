@@ -17,11 +17,11 @@
     </ion-slide>
   </ion-slides> -->
   <ion-img src="./../../../assets/burger.png"></ion-img>
-  <form class="ion-margin-horizontal" #form="ngForm" (ngSubmit)="login(form)">
+  <form class="ion-margin-horizontal" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
     <ion-item>
       <ion-icon slot="start" name="person-circle-outline"></ion-icon>
       <ion-label position="floating">Employee ID</ion-label>
-      <ion-input type="text" ngModel name="empId" placeholder="753782" required></ion-input>
+      <ion-input type="number" ngModel name="empId" placeholder="753782" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-icon slot="start" name="key-outline"></ion-icon>

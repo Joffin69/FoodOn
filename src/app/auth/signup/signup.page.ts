@@ -32,6 +32,7 @@ export class SignupPage implements OnInit {
       return;
     }
     this.authService.signup(form.value.empId, form.value.password);
+    form.resetForm();
   }
 
 }

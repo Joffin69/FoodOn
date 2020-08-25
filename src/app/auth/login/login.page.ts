@@ -22,6 +22,7 @@ export class LoginPage implements OnInit {
       return;
     }
     this.authService.login(form.value.empId, form.value.password);
+    form.resetForm();
   }
 
 }

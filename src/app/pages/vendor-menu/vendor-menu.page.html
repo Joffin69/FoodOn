@@ -46,7 +46,7 @@
             <ion-text slot="start" class="category_name">
               {{selectedCategory?selectedCategory.name:'All Dishes'}}
             </ion-text>
-            <ion-toggle [ngModel]="toggleValue" [checked]="toggleValue" (ngModelChange)="filterDishType($event)" *ngIf="isRequired()"></ion-toggle>
+            <ion-toggle [(ngModel)]="toggleValue" [checked]="toggleValue" (ngModelChange)="filterDishType($event)" *ngIf="isRequired()"></ion-toggle>
             <ion-text style="margin-left: 10px;" *ngIf="isRequired()">Veg</ion-text>
           </ion-item>
           <div *ngFor="let dish of loadedDishes" class="ion-margin-vertical">

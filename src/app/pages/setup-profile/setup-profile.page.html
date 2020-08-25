@@ -17,24 +17,24 @@
     <ion-slide>
       <ion-img class="ion-margin-horizontal img" src="./../../../assets/u3.jpg"></ion-img>
       <h2 class="h2">Tell us more about yourself</h2>
-      <form #form="ngForm" (ngSubmit)="saveUser(form)">
+      <form [formGroup]="formOne" (submit)="saveUser()">
         <ion-item> 
           <ion-icon slot="start" name="person-circle-outline"></ion-icon>
           <ion-label position="floating">Name</ion-label>
-          <ion-input type="text" ngModel name="name" placeholder="Joffin" required></ion-input>
+          <ion-input type="text" formControlName="name" placeholder="Joffin"></ion-input>
         </ion-item>
         <ion-item>
           <ion-icon slot="start" name="person-outline"></ion-icon>
           <ion-label position="floating">Email ID</ion-label>
-          <ion-input type="text" ngModel name="emailId" placeholder="joffin@gmail.com" required></ion-input>
+          <ion-input type="text" formControlName="emailId" placeholder="joffin@gmail.com"></ion-input>
         </ion-item>
         <ion-item>
           <ion-icon slot="start" name="call-outline"></ion-icon>
           <ion-label position="floating">Mobile Number</ion-label>
-          <ion-input type="number" ngModel name="phone" placeholder="94xxxxx38" [pattern]="mobNumberPattern" required></ion-input>
+          <ion-input type="number" formControlName="phone" placeholder="94xxxxx38"></ion-input>
         </ion-item> 
         <div class="ion-text-center ion-margin-top ion-margin-horizontal">
-          <ion-button  fill="outline" color="primary" size="default" type="submit" [disabled]="form.invalid">Continue <ion-icon slot="end"
+          <ion-button  fill="outline" color="primary" size="default" type="submit" [disabled]="formOne.invalid">Continue <ion-icon slot="end"
             name="arrow-forward"></ion-icon>
           </ion-button>  
         </div>

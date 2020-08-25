@@ -13,6 +13,10 @@ import { CommonModule } from '@angular/common';
 
 import { ErrorInterceptor } from './error.interceptor';
 import { AuthInterceptor } from './auth.interceptor';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
+import { SetupProfilePage } from './pages/setup-profile/setup-profile.page';
+import { LoginPage } from './auth/login/login.page';
 // import { AngularFireModule } from '@angular/fire';
 // import { AngularFireAuthModule } from '@angular/fire/auth';
 
@@ -24,9 +28,11 @@ import { AuthInterceptor } from './auth.interceptor';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+  imports: [BrowserModule, FormsModule,
+    ReactiveFormsModule,
+    IonicModule.forRoot(), AppRoutingModule,
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
   ],
 
   providers: [

@@ -59,7 +59,7 @@ exports.createUser = (req, res, next) => {
       .catch(error => {
         console.log(error);
         res.status(404).json({
-          message: 'Invalid data. Please try again !'
+          message: 'The Employee ID already exists or you have provided invalid data. Please provide valid data and try again !'
         })
       })
     })

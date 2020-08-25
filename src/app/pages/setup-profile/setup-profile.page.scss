@@ -5,3 +5,15 @@
 .h2 {
     margin-top: 10px !important;
 }
+
+.invalid {
+    border: 1px solid #ea6153;
+}
+
+.valid {
+    border: 1px solid green;
+}
+
+ion-item {
+    margin-top: 10px;
+}

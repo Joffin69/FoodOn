@@ -73,6 +73,7 @@ export class VendorMenuPage implements OnInit {
     this.loadedDishes = [...this.dishes.filter((dish) => {
       return dish.categoryId === this.selectedCategory.categoryId;
     })];
+    this.toggleValue = false;
   }
 
   filterDishType(event) {
