@@ -36,10 +36,11 @@ export class OrderDishPage implements OnInit {
 
   ngOnInit() {
     this.dataService.getAllOrders();
-    this.orderSub = this.dataService.getOrdersUpdateListener()
-    .subscribe((ordersList: {orders: any}) => {
-      this.orders = ordersList.orders;
-    });
+    // this.orderSub = this.dataService.getOrdersUpdateListener()
+    // .subscribe((ordersList: {orders: any}) => {
+    //   this.orders = ordersList.orders;
+    // });
+    this.orders = this.dataService.orders;
     this.cartArray = this.dataService.cartArray;
     this.setCartArray();
   }
@@ -116,7 +117,7 @@ export class OrderDishPage implements OnInit {
 
   getOrderIds() {
     const orderIds = [];
-    if (this.orders.length) {
+    if (this.orders && this.orders.length) {
       for (const order of this.orders) {
         orderIds.push(order.orderId);
       }
